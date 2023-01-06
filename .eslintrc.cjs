@@ -1,0 +1,85 @@
+/* required packages:
+ * eslint
+ * eslint-config-airbnb-base
+ * eslint-config-prettier
+ * eslint-plugin-import
+ * eslint-plugin-react-hooks
+ * eslint-config-airbnb-typescript
+ * @typescript-eslint/eslint-plugin
+ * @typescript-eslint/parser
+ */
+
+const eslintJsConfig = {
+  extends: [
+    "eslint:recommended",
+    "airbnb-base",
+    "prettier",
+    "plugin:storybook/recommended",
+  ],
+  plugins: ["react-hooks", "import"],
+  rules: {
+    semi: 2,
+    "prefer-template": "off",
+    "no-console": "off",
+    "no-undef": "off",
+    "no-plusplus": "off",
+    camelcase: "off",
+    "import/no-named-as-default": "off",
+    "no-use-before-define": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        js: "never",
+        jsx: "never",
+        ts: "never",
+        tsx: "never",
+      },
+    ],
+  },
+  settings: {
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+      },
+    },
+  },
+};
+
+const eslintTsConfig = {
+  files: ["*.ts", "*.tsx"],
+  extends: [
+    "eslint:recommended",
+    "airbnb-base",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb-typescript/base",
+    "prettier",
+    "plugin:storybook/recommended",
+  ],
+  plugins: ["@typescript-eslint", "react-hooks", "import"],
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    tsconfigRootDir: __dirname,
+    ecmaVersion: "latest",
+    project: ["./tsconfig.json"],
+  },
+  rules: {
+    ...eslintJsConfig.rules,
+    "@typescript-eslint/switch-exhaustiveness-check": "error",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-var-requires": 0,
+  },
+  settings: eslintJsConfig.settings,
+};
+
+module.exports = {
+  root: true,
+  ...eslintJsConfig,
+  overrides: [eslintTsConfig],
+  ignorePatterns: ["vite.config.ts", "node_modules", "dist"],
+};

@@ -1,0 +1,12 @@
+{
+  "arrowParens": "avoid",
+  "printWidth": 80,
+  "semi": true,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "useTabs": false,
+  "endOfLine": "lf",
+  "tailwindConfig": "./tailwind.config.cjs",
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "pluginSearchDirs": false
+}
