@@ -3,8 +3,8 @@ import {
   redirect,
   RouterProvider,
 } from "react-router-dom";
-import PathfindingDemo from "./PathfindingDemo";
-import SortingDemo from "./SortingDemo";
+import { DemoLayout } from "./DemoLayout";
+import { SortingDemo } from "./SortingDemo";
 
 const router = createBrowserRouter([
   {
@@ -13,11 +13,19 @@ const router = createBrowserRouter([
   },
   {
     path: "sorting",
-    element: <SortingDemo />,
+    element: (
+      <DemoLayout>
+        <SortingDemo />
+      </DemoLayout>
+    ),
   },
   {
     path: "pathfinding",
-    element: <PathfindingDemo />,
+    element: (
+      <DemoLayout>
+        <SortingDemo />
+      </DemoLayout>
+    ),
   },
 ]);
 

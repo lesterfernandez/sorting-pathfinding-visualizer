@@ -10,12 +10,7 @@
  */
 
 const eslintJsConfig = {
-  extends: [
-    "eslint:recommended",
-    "airbnb-base",
-    "prettier",
-    "plugin:storybook/recommended",
-  ],
+  extends: ["eslint:recommended", "airbnb-base", "prettier"],
   plugins: ["react-hooks", "import"],
   rules: {
     semi: 2,
@@ -59,7 +54,6 @@ const eslintTsConfig = {
     "plugin:@typescript-eslint/recommended",
     "airbnb-typescript/base",
     "prettier",
-    "plugin:storybook/recommended",
   ],
   plugins: ["@typescript-eslint", "react-hooks", "import"],
   parser: "@typescript-eslint/parser",
