@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import { DemoLayout } from "./DemoLayout";
 import { SortingDemo } from "./SortingDemo";
+import { SortingModal } from "./SortingModal";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
   {
     path: "sorting",
     element: (
-      <DemoLayout>
+      <DemoLayout modal={<SortingModal />}>
         <SortingDemo />
       </DemoLayout>
     ),
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
   {
     path: "pathfinding",
     element: (
-      <DemoLayout>
+      <DemoLayout modal={<SortingModal />}>
         <SortingDemo />
       </DemoLayout>
     ),
