@@ -2,11 +2,7 @@ import { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { ConfigureModal } from "./ConfigureModal";
 
-interface Props {
-  modal: JSX.Element;
-}
-
-export function DemoTopBar({ modal }: Props) {
+export function DemoTopBar() {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const toggleModal = () => void modalRef.current?.classList.toggle("hidden");
 
@@ -43,11 +39,7 @@ export function DemoTopBar({ modal }: Props) {
           Visualize
         </button>
       </div>
-      <ConfigureModal
-        modal={modal}
-        modalRef={modalRef}
-        toggleModal={toggleModal}
-      />
+      <ConfigureModal modalRef={modalRef} toggleModal={toggleModal} />
     </>
   );
 }

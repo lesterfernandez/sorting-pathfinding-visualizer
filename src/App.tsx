@@ -4,6 +4,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { SortingProvider } from "./AlgorithmProviders";
+import { ConfigureModalContext } from "./ConfigureModalContext";
 import { DemoLayout } from "./DemoLayout";
 import { SortingDemo } from "./SortingDemo";
 import { SortingModal } from "./SortingModal";
@@ -17,18 +18,24 @@ const router = createBrowserRouter([
     path: "sorting",
     element: (
       <SortingProvider>
-        <DemoLayout modal={<SortingModal />}>
-          <SortingDemo />
-        </DemoLayout>
+        <ConfigureModalContext.Provider value={{ Modal: SortingModal }}>
+          <DemoLayout>
+            <SortingDemo />
+          </DemoLayout>
+        </ConfigureModalContext.Provider>
       </SortingProvider>
     ),
   },
   {
     path: "pathfinding",
     element: (
-      <DemoLayout modal={<SortingModal />}>
-        <SortingDemo />
-      </DemoLayout>
+      <SortingProvider>
+        <ConfigureModalContext.Provider value={{ Modal: SortingModal }}>
+          <DemoLayout>
+            <SortingDemo />
+          </DemoLayout>
+        </ConfigureModalContext.Provider>
+      </SortingProvider>
     ),
   },
 ]);

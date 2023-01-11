@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createPortal } from "react-dom";
+import { ConfigureModalContext } from "./ConfigureModalContext";
 
 interface Props {
-  modal: JSX.Element;
   modalRef: React.Ref<HTMLDivElement>;
   toggleModal: () => void;
 }
 
-export function ConfigureModal({ modal, toggleModal, modalRef }: Props) {
+export function ConfigureModal({ toggleModal, modalRef }: Props) {
+  const { Modal } = useContext(ConfigureModalContext);
   return createPortal(
     <div
       className="fixed inset-0 hidden bg-gray-700 bg-opacity-30"
@@ -28,16 +29,7 @@ export function ConfigureModal({ modal, toggleModal, modalRef }: Props) {
             X
           </button>
         </div>
-        <div className="flex-grow overflow-y-scroll">{modal}</div>
-        <div className="flex h-14 w-full items-center border-t-2 px-4">
-          <button
-            type="button"
-            className="my-2 ml-auto select-none rounded-md bg-blue-200 p-2 px-4 hover:bg-blue-300"
-            onClick={() => void toggleModal()}
-          >
-            Ok
-          </button>
-        </div>
+        <Modal toggleModal={toggleModal} />
       </div>
     </div>,
     document.body

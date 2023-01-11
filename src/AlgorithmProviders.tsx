@@ -1,8 +1,8 @@
 import { createContext, useState } from "react";
 
-type SortingAlgorithm = "insertion" | "merge" | "quick" | "heap";
+export type SortingAlgorithm = "insertion" | "merge" | "quick" | "heap";
 
-interface SortingSettings {
+export interface SortingSettings {
   algorithm: SortingAlgorithm;
   speed: number;
   amount: number;
@@ -15,11 +15,11 @@ const defaultSortingSettings: SortingSettings = {
 };
 
 interface SortingContext {
-  setSettings: React.Dispatch<React.SetStateAction<SortingSettings>>;
   settings: SortingSettings;
+  setSettings: React.Dispatch<React.SetStateAction<SortingSettings>>;
 }
 
-const SortingAlgorithmContext = createContext({} as SortingContext);
+export const SortingAlgorithmContext = createContext({} as SortingContext);
 
 interface ProviderProps {
   children: React.ReactNode;
