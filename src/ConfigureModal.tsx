@@ -1,9 +1,9 @@
-import { Ref } from "react";
+import React from "react";
 import { createPortal } from "react-dom";
 
 interface Props {
   modal: JSX.Element;
-  modalRef: Ref<HTMLDivElement>;
+  modalRef: React.Ref<HTMLDivElement>;
   toggleModal: () => void;
 }
 
@@ -15,7 +15,7 @@ export function ConfigureModal({ modal, toggleModal, modalRef }: Props) {
       ref={modalRef}
     >
       <div
-        className="absolute inset-0 m-auto flex h-2/3 w-5/6 max-w-xl flex-col rounded bg-white text-center shadow"
+        className="absolute inset-0 m-auto flex h-[60vh] w-5/6 max-w-xl flex-col rounded bg-white text-center shadow"
         onClick={e => void e.stopPropagation()}
       >
         <div className="flex w-full items-center border-b-2 p-2 px-4">
@@ -33,9 +33,7 @@ export function ConfigureModal({ modal, toggleModal, modalRef }: Props) {
           <button
             type="button"
             className="my-2 ml-auto select-none rounded-md bg-blue-200 p-2 px-4 hover:bg-blue-300"
-            onClick={() => {
-              toggleModal();
-            }}
+            onClick={() => void toggleModal()}
           >
             Ok
           </button>
