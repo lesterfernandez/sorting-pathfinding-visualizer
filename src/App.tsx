@@ -3,8 +3,8 @@ import {
   redirect,
   RouterProvider,
 } from "react-router-dom";
-import { SortingProvider } from "./AlgorithmProviders";
 import { ConfigureModalProvider } from "./modal/ConfigureModalContext";
+import { SortingSettingsProvider } from "./sorting/SortingContext";
 import { SortingDemo } from "./sorting/SortingDemo";
 import { SortingModal } from "./sorting/SortingModal";
 import { DemoLayout } from "./ui/DemoLayout";
@@ -17,25 +17,25 @@ const router = createBrowserRouter([
   {
     path: "sorting",
     element: (
-      <SortingProvider>
+      <SortingSettingsProvider>
         <ConfigureModalProvider modal={SortingModal}>
           <DemoLayout>
             <SortingDemo />
           </DemoLayout>
         </ConfigureModalProvider>
-      </SortingProvider>
+      </SortingSettingsProvider>
     ),
   },
   {
     path: "pathfinding",
     element: (
-      <SortingProvider>
+      <SortingSettingsProvider>
         <ConfigureModalProvider modal={SortingModal}>
           <DemoLayout>
             <SortingDemo />
           </DemoLayout>
         </ConfigureModalProvider>
-      </SortingProvider>
+      </SortingSettingsProvider>
     ),
   },
 ]);

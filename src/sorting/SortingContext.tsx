@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 
 export type SortingAlgorithm = "insertion" | "merge" | "quick" | "heap";
 
@@ -14,22 +14,30 @@ const defaultSortingSettings: SortingSettings = {
   amount: 100,
 };
 
-interface SortingContext {
+interface SortingSettingsContext {
   settings: SortingSettings;
   setSettings: React.Dispatch<React.SetStateAction<SortingSettings>>;
+  array: number[];
 }
 
-export const SortingAlgorithmContext = createContext({} as SortingContext);
+export const SortingContext = createContext({} as SortingSettingsContext);
 
 interface ProviderProps {
   children: React.ReactNode;
 }
 
-export function SortingProvider({ children }: ProviderProps) {
+export function SortingSettingsProvider({ children }: ProviderProps) {
   const [settings, setSettings] = useState(defaultSortingSettings);
+
+  const array = useMemo(
+    () =>
+      Array.from({ length: settings.amount }, () => ~~(Math.random() * 101)),
+    [settings.amount]
+  );
+
   return (
-    <SortingAlgorithmContext.Provider value={{ settings, setSettings }}>
+    <SortingContext.Provider value={{ settings, setSettings, array }}>
       {children}
-    </SortingAlgorithmContext.Provider>
+    </SortingContext.Provider>
   );
 }

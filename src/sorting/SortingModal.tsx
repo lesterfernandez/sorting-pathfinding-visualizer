@@ -1,16 +1,13 @@
 import { useContext, useState } from "react";
-import {
-  SortingAlgorithm,
-  SortingAlgorithmContext,
-} from "../AlgorithmProviders";
 import { ConfigureModalFooter } from "../modal/ConfigureModalFooter";
+import { SortingAlgorithm, SortingContext } from "./SortingContext";
 
 interface Props {
   toggleModal: () => void;
 }
 
 export function SortingModal({ toggleModal }: Props) {
-  const { settings, setSettings } = useContext(SortingAlgorithmContext);
+  const { settings, setSettings } = useContext(SortingContext);
   const [newSettings, setNewSettings] = useState({ ...settings });
 
   const updateSpeed = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -30,17 +27,21 @@ export function SortingModal({ toggleModal }: Props) {
             <select
               id="sort-selector"
               className="rounded-md border-2 px-4 py-2"
+              value={newSettings.algorithm}
+              onChange={e =>
+                void updateAlgorithm(e.target.value as SortingAlgorithm)
+              }
             >
-              <option onChange={() => void updateAlgorithm("insertion")}>
+              <option value={"insertion" satisfies SortingAlgorithm}>
                 Insertion Sort
               </option>
-              <option onChange={() => void updateAlgorithm("merge")}>
+              <option value={"merge" satisfies SortingAlgorithm}>
                 Merge Sort
               </option>
-              <option onChange={() => void updateAlgorithm("quick")}>
+              <option value={"quick" satisfies SortingAlgorithm}>
                 Quick Sort
               </option>
-              <option onChange={() => void updateAlgorithm("heap")}>
+              <option value={"heap" satisfies SortingAlgorithm}>
                 Heap Sort
               </option>
             </select>

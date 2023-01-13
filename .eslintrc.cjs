@@ -18,6 +18,7 @@ const eslintJsConfig = {
     "no-console": "off",
     "no-undef": "off",
     "no-plusplus": "off",
+    "no-bitwise": "off",
     camelcase: "off",
     "no-use-before-define": "off",
     "no-void": "off",
