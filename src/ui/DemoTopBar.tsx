@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { NavLink } from "react-router-dom";
-import { ConfigureModal } from "./ConfigureModal";
+import { ConfigureModal } from "../modal/ConfigureModal";
 
 export function DemoTopBar() {
   const modalRef = useRef<HTMLDivElement | null>(null);

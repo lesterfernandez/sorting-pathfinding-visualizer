@@ -2,8 +2,8 @@ import { useContext, useState } from "react";
 import {
   SortingAlgorithm,
   SortingAlgorithmContext,
-} from "./AlgorithmProviders";
-import { ConfigureModalFooter } from "./ConfigureModalFooter";
+} from "../AlgorithmProviders";
+import { ConfigureModalFooter } from "../modal/ConfigureModalFooter";
 
 interface Props {
   toggleModal: () => void;

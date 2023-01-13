@@ -4,10 +4,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { SortingProvider } from "./AlgorithmProviders";
-import { ConfigureModalContext } from "./ConfigureModalContext";
-import { DemoLayout } from "./DemoLayout";
-import { SortingDemo } from "./SortingDemo";
-import { SortingModal } from "./SortingModal";
+import { ConfigureModalProvider } from "./modal/ConfigureModalContext";
+import { SortingDemo } from "./sorting/SortingDemo";
+import { SortingModal } from "./sorting/SortingModal";
+import { DemoLayout } from "./ui/DemoLayout";
 
 const router = createBrowserRouter([
   {
@@ -18,11 +18,11 @@ const router = createBrowserRouter([
     path: "sorting",
     element: (
       <SortingProvider>
-        <ConfigureModalContext.Provider value={{ Modal: SortingModal }}>
+        <ConfigureModalProvider modal={SortingModal}>
           <DemoLayout>
             <SortingDemo />
           </DemoLayout>
-        </ConfigureModalContext.Provider>
+        </ConfigureModalProvider>
       </SortingProvider>
     ),
   },
@@ -30,11 +30,11 @@ const router = createBrowserRouter([
     path: "pathfinding",
     element: (
       <SortingProvider>
-        <ConfigureModalContext.Provider value={{ Modal: SortingModal }}>
+        <ConfigureModalProvider modal={SortingModal}>
           <DemoLayout>
             <SortingDemo />
           </DemoLayout>
-        </ConfigureModalContext.Provider>
+        </ConfigureModalProvider>
       </SortingProvider>
     ),
   },
@@ -45,5 +45,3 @@ export function App() {
 }
 
 export default App;
-
-// each renders a layout component along with the header and canvas
