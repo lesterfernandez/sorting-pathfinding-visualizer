@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { ConfigureModalFooter } from "../modal/ConfigureModalFooter";
-import { SortingAlgorithm, SortingContext } from "./SortingContext";
+import { SortingAlgorithm, SortingContext, SortingSpeed } from "./SortingContext";
 
 interface Props {
   toggleModal: () => void;
@@ -11,7 +11,7 @@ export function SortingModal({ toggleModal }: Props) {
   const [newSettings, setNewSettings] = useState({ ...settings });
 
   const updateSpeed = (e: React.ChangeEvent<HTMLInputElement>) =>
-    void setNewSettings(prev => ({ ...prev, speed: +e.target.value }));
+    void setNewSettings(prev => ({ ...prev, speed: e.target.value as SortingSpeed }));
 
   const updateAlgorithm = (algorithm: SortingAlgorithm) =>
     void setNewSettings(prev => ({ ...prev, algorithm }));
@@ -28,22 +28,12 @@ export function SortingModal({ toggleModal }: Props) {
               id="sort-selector"
               className="rounded-md border-2 px-4 py-2"
               value={newSettings.algorithm}
-              onChange={e =>
-                void updateAlgorithm(e.target.value as SortingAlgorithm)
-              }
+              onChange={e => void updateAlgorithm(e.target.value as SortingAlgorithm)}
             >
-              <option value={"insertion" satisfies SortingAlgorithm}>
-                Insertion Sort
-              </option>
-              <option value={"merge" satisfies SortingAlgorithm}>
-                Merge Sort
-              </option>
-              <option value={"quick" satisfies SortingAlgorithm}>
-                Quick Sort
-              </option>
-              <option value={"heap" satisfies SortingAlgorithm}>
-                Heap Sort
-              </option>
+              <option value={"merge" satisfies SortingAlgorithm}>Merge Sort</option>
+              <option value={"quick" satisfies SortingAlgorithm}>Quick Sort</option>
+              <option value={"heap" satisfies SortingAlgorithm}>Heap Sort</option>
+              <option value={"insertion" satisfies SortingAlgorithm}>Insertion Sort</option>
             </select>
           </div>
           <div className="space-y-3">
@@ -53,7 +43,7 @@ export function SortingModal({ toggleModal }: Props) {
                 Slow
                 <input
                   type="radio"
-                  value="10"
+                  value={"slow" satisfies SortingSpeed}
                   name="sort-speed"
                   onChange={updateSpeed}
                 />
@@ -62,16 +52,17 @@ export function SortingModal({ toggleModal }: Props) {
                 Medium
                 <input
                   type="radio"
-                  value="5"
+                  value={"medium" satisfies SortingSpeed}
                   name="sort-speed"
                   onChange={updateSpeed}
+                  defaultChecked
                 />
               </label>
               <label className="inline-flex items-center gap-1">
                 Fast
                 <input
                   type="radio"
-                  value="1"
+                  value={"fast" satisfies SortingSpeed}
                   name="sort-speed"
                   onChange={updateSpeed}
                 />

@@ -19,6 +19,8 @@ const eslintJsConfig = {
     "no-undef": "off",
     "no-plusplus": "off",
     "no-bitwise": "off",
+    "no-param-reassign": "off",
+    "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"],
     camelcase: "off",
     "no-use-before-define": "off",
     "no-void": "off",

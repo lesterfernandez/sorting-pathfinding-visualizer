@@ -1,8 +1,4 @@
-import {
-  createBrowserRouter,
-  redirect,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
 import { ConfigureModalProvider } from "./modal/ConfigureModalContext";
 import { SortingSettingsProvider } from "./sorting/SortingContext";
 import { SortingDemo } from "./sorting/SortingDemo";
