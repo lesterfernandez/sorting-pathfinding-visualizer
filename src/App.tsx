@@ -15,9 +15,7 @@ const router = createBrowserRouter([
     element: (
       <SortingSettingsProvider>
         <ConfigureModalProvider modal={SortingModal}>
-          <DemoLayout>
-            <SortingDemo />
-          </DemoLayout>
+          <SortingDemo />
         </ConfigureModalProvider>
       </SortingSettingsProvider>
     ),
@@ -27,9 +25,7 @@ const router = createBrowserRouter([
     element: (
       <SortingSettingsProvider>
         <ConfigureModalProvider modal={SortingModal}>
-          <DemoLayout>
-            <SortingDemo />
-          </DemoLayout>
+          <SortingDemo />
         </ConfigureModalProvider>
       </SortingSettingsProvider>
     ),
@@ -37,7 +33,11 @@ const router = createBrowserRouter([
 ]);
 
 export function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <DemoLayout>
+      <RouterProvider router={router} />
+    </DemoLayout>
+  );
 }
 
 export default App;
