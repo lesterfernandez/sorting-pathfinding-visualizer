@@ -1,7 +1,9 @@
 import { useContext } from "react";
+import { ConfigureModalProvider } from "../modal/ConfigureModalContext";
 import { DemoTopBar } from "../ui/DemoTopBar";
 import { sortingAlgorithms } from "./sorting-algorithms";
 import { SortingAlgorithm, SortingContext } from "./SortingContext";
+import { SortingModal } from "./SortingModal";
 import { SortingVisualizer } from "./SortingVisualizer";
 
 let animationPlaying = false;
@@ -13,7 +15,7 @@ export const SortingDemo = () => {
   } = useContext(SortingContext);
 
   return (
-    <>
+    <ConfigureModalProvider modal={SortingModal}>
       <DemoTopBar
         visualize={() => {
           if (animationPlaying) {
@@ -33,7 +35,7 @@ export const SortingDemo = () => {
         }}
       />
       <SortingVisualizer />
-    </>
+    </ConfigureModalProvider>
   );
 };
 
