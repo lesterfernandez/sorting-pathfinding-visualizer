@@ -1,8 +1,8 @@
+import { SortingAlgorithm } from "../stores/sorting-store";
 import { insertionSort } from "./insertion-sort";
 import { MaxHeap } from "./max-heap";
 import { mergeSort } from "./merge-sort";
 import { quickSort } from "./quick-sort";
-import { SortingAlgorithm } from "./SortingContext";
 
 export const sortingAlgorithms: Record<
   SortingAlgorithm,

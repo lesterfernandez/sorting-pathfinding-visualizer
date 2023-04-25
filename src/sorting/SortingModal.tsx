@@ -1,14 +1,18 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { ConfigureModalFooter } from "../modal/ConfigureModalFooter";
-import { SortingAlgorithm, SortingContext, SortingSpeed } from "./SortingContext";
+import {
+  SortingAlgorithm,
+  SortingSpeed,
+  SortingStore,
+  useSortingStore,
+} from "../stores/sorting-store";
 
 interface Props {
   toggleModal: () => void;
 }
 
 export function SortingModal({ toggleModal }: Props) {
-  const { settings, setSettings } = useContext(SortingContext);
-  const [newSettings, setNewSettings] = useState({ ...settings });
+  const [newSettings, setNewSettings] = useState<SortingStore>(useSortingStore.getState());
 
   const updateSpeed = (e: React.ChangeEvent<HTMLInputElement>) =>
     void setNewSettings(prev => ({ ...prev, speed: e.target.value as SortingSpeed }));
@@ -79,8 +83,8 @@ export function SortingModal({ toggleModal }: Props) {
                 max={300}
                 value={newSettings.amount}
                 onChange={e =>
-                  void setNewSettings(prev => ({
-                    ...prev,
+                  void setNewSettings(state => ({
+                    ...state,
                     amount: +e.target.value,
                   }))
                 }
@@ -92,7 +96,7 @@ export function SortingModal({ toggleModal }: Props) {
       </div>
       <ConfigureModalFooter
         onSubmit={() => {
-          setSettings({ ...newSettings });
+          useSortingStore.setState(newSettings);
           toggleModal();
         }}
       />

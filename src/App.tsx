@@ -1,7 +1,5 @@
 import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
-import { SortingSettingsProvider } from "./sorting/SortingContext";
 import { SortingDemo } from "./sorting/SortingDemo";
-import { DemoLayout } from "./ui/DemoLayout";
 
 const router = createBrowserRouter([
   {
@@ -10,28 +8,16 @@ const router = createBrowserRouter([
   },
   {
     path: "sorting",
-    element: (
-      <SortingSettingsProvider>
-        <SortingDemo />
-      </SortingSettingsProvider>
-    ),
+    element: <SortingDemo />,
   },
   {
     path: "pathfinding",
-    element: (
-      <SortingSettingsProvider>
-        <SortingDemo />
-      </SortingSettingsProvider>
-    ),
+    element: <SortingDemo />,
   },
 ]);
 
 export function App() {
-  return (
-    <DemoLayout>
-      <RouterProvider router={router} />
-    </DemoLayout>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

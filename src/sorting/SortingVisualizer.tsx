@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useSortingArray } from "../stores/sorting-store";
 import { VisualizerContainer } from "../ui/VisualizerContainer";
-import { SortingContext } from "./SortingContext";
 
 export const SortingVisualizer = React.memo(() => {
-  const { array } = useContext(SortingContext);
+  const array = useSortingArray();
 
   return (
     <VisualizerContainer>
