@@ -8,7 +8,7 @@ interface Props {
 }
 
 export function ConfigureModal({ toggleModal, modalRef }: Props) {
-  const { Modal } = useContext(ConfigureModalContext);
+  const Modal = useContext(ConfigureModalContext);
   return createPortal(
     <div
       className="fixed inset-0 hidden bg-gray-700 bg-opacity-30"
