@@ -3,7 +3,22 @@ import { ConfigureModalProvider } from "../modal/ConfigureModalContext";
 import { SortingModal } from "../sorting/SortingModal";
 import { DemoLayout } from "../ui/DemoLayout";
 
+const GRID_ROWS = 22;
+
 export default function PathfindingDemo() {
+  const grid = useRef<number[][]>(
+    Array.from({ length: GRID_ROWS }, () => Array.from({ length: GRID_ROWS }, () => 0))
+  );
+
+  const getElementIndex = (element: HTMLDivElement): [number, number] => {
+    const id = +element.id;
+    const row = Math.floor(id / GRID_ROWS);
+    const col = id % GRID_ROWS;
+    return [row, col];
+  };
+
+  // const idFromIndex = (row: number, col: number) => String(row * GRID_ROWS + col);
+
   const processed = useRef(new Set<string>());
   const dragging = useRef(false);
   const placing = useRef(true);
@@ -33,12 +48,15 @@ export default function PathfindingDemo() {
   };
 
   const setBlock = (element: HTMLDivElement) => {
+    const [row, col] = getElementIndex(element);
     if (placing.current && element.classList.contains("bg-white")) {
       element.classList.remove("bg-white");
       element.classList.add("bg-amber-100");
+      grid.current[row][col] = 1;
     } else if (!placing.current && element.classList.contains("bg-amber-100")) {
       element.classList.remove("bg-amber-100");
       element.classList.add("bg-white");
+      grid.current[row][col] = 0;
     }
   };
 
@@ -51,7 +69,7 @@ export default function PathfindingDemo() {
           className="absolute inset-0 grid auto-rows-min grid-cols-[repeat(auto-fit,_minmax(42px,_1fr))] gap-0 overflow-hidden"
           onPointerLeave={disableDrawing}
         >
-          {Array.from({ length: 484 }).map((_, i) => (
+          {Array.from({ length: GRID_ROWS ** 2 }).map((_, i) => (
             <div
               id={`${i}`}
               key={`pf-${i}`}
@@ -60,7 +78,6 @@ export default function PathfindingDemo() {
               onPointerUp={disableDrawing}
               onPointerCancel={disableDrawing}
               className="h-[42px] touch-none select-none bg-white outline outline-1 outline-black"
-              // style={{ background: "white" }}
             ></div>
           ))}
         </div>
