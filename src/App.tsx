@@ -1,4 +1,5 @@
 import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
+import PathfindingDemo from "./pathfinding/PathfindingDemo";
 import { SortingDemo } from "./sorting/SortingDemo";
 
 const router = createBrowserRouter([
@@ -12,7 +13,7 @@ const router = createBrowserRouter([
   },
   {
     path: "pathfinding",
-    element: <SortingDemo />,
+    element: <PathfindingDemo />,
   },
 ]);
 
