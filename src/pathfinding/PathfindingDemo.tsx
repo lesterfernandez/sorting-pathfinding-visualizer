@@ -66,7 +66,7 @@ export default function PathfindingDemo() {
     <ConfigureModalProvider modal={SortingModal}>
       <DemoLayout>
         <div
-          className="absolute inset-0 grid auto-rows-min grid-cols-[repeat(auto-fit,_minmax(42px,_1fr))] gap-0 overflow-hidden"
+          className="absolute inset-0 grid auto-rows-min grid-cols-[repeat(22,_minmax(0,_1fr))] grid-rows-[repeat(22,_minmax(0,_1fr))] gap-0 overflow-hidden"
           onPointerLeave={disableDrawing}
         >
           {Array.from({ length: GRID_ROWS ** 2 }).map((_, i) => (
@@ -77,7 +77,7 @@ export default function PathfindingDemo() {
               onPointerOver={handlePointerOver}
               onPointerUp={disableDrawing}
               onPointerCancel={disableDrawing}
-              className="h-[42px] touch-none select-none bg-white outline outline-1 outline-black"
+              className="h-[42px] touch-none select-none bg-white outline-dashed outline-1 outline-blue-300"
             ></div>
           ))}
         </div>
