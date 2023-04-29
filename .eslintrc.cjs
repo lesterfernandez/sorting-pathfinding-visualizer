@@ -1,10 +1,8 @@
 /* required packages:
  * eslint
- * eslint-config-airbnb-base
  * eslint-config-prettier
  * eslint-plugin-import
  * eslint-plugin-react-hooks
- * eslint-config-airbnb-typescript
  * @typescript-eslint/eslint-plugin
  * @typescript-eslint/parser
  */
@@ -15,13 +13,7 @@ module.exports = {
   overrides: [
     {
       files: ["*.ts", "*.tsx"],
-      extends: [
-        "eslint:recommended",
-        "airbnb-base",
-        "plugin:@typescript-eslint/recommended",
-        "airbnb-typescript/base",
-        "prettier",
-      ],
+      extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
       plugins: ["@typescript-eslint", "react-hooks", "import"],
       parser: "@typescript-eslint/parser",
       parserOptions: {
@@ -31,19 +23,6 @@ module.exports = {
       },
       rules: {
         semi: 2,
-        "prefer-template": "off",
-        "no-console": "off",
-        "no-undef": "off",
-        "no-plusplus": "off",
-        "no-bitwise": "off",
-        "no-param-reassign": "off",
-        "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"],
-        camelcase: "off",
-        "no-use-before-define": "off",
-        "no-void": "off",
-        "import/no-named-as-default": "off",
-        "import/no-extraneous-dependencies": "off",
-        "import/prefer-default-export": "off",
         "import/first": "error",
         "import/newline-after-import": "error",
         "import/no-duplicates": "error",

@@ -5,9 +5,10 @@ import { useVisualize } from "../stores/visualize-store";
 
 export function DemoTopBar() {
   const modalRef = useRef<HTMLDivElement | null>(null);
+  const visualize = useVisualize(state => state.visualize);
+
   const toggleModal = () => void modalRef.current?.classList.toggle("hidden");
   const [animationPlaying, setAnimationPlaying] = useState(false);
-  const visualize = useVisualize(state => state.visualize);
 
   return (
     <>
