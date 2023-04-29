@@ -20,6 +20,7 @@ export default function PathfindingDemo() {
     resetGridPaint,
     disableDrawing,
     animationPlaying,
+    visualizationPainted,
   } = usePathfindingGrid(GRID_ROWS);
 
   const bfsVisualization = async () => {
@@ -31,6 +32,7 @@ export default function PathfindingDemo() {
       idFromIndex,
       indexFromId
     );
+    visualizationPainted.current = true;
     await animateBfs(sourceId, targetId, path, animationArray, animationPlaying, ANIMATION_SPEED);
   };
 

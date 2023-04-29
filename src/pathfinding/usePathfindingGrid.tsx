@@ -11,6 +11,7 @@ export default (rowCount: number) => {
   const [sourceRow, sourceCol] = [Math.floor(rowCount / 2), 1];
   const sourceId = idFromIndex(sourceRow, sourceCol);
   const animationPlaying = useRef(false);
+  const visualizationPainted = useRef(false);
 
   const grid = useRef<number[][]>(
     Array.from({ length: rowCount }, () => Array.from({ length: rowCount }, () => 0))
@@ -30,15 +31,22 @@ export default (rowCount: number) => {
 
   const handlePointerDown: PointerEventHandler<HTMLDivElement> = e => {
     if (animationPlaying.current) return;
+
+    if (visualizationPainted.current) {
+      visualizationPainted.current = false;
+      resetGridPaint();
+    }
+
     dragging.current = true;
     placing.current = isBlockEmpty(e.currentTarget);
     processed.current.add(e.currentTarget.id);
-    setBlock(e.currentTarget);
     // Prevents "direct manipulation" pointer capture on mobile
     // https://www.w3.org/TR/pointerevents3/#implicit-pointer-capture
     if (e.currentTarget.hasPointerCapture(e.pointerId)) {
       e.currentTarget.releasePointerCapture(e.pointerId);
     }
+
+    setBlock(e.currentTarget);
   };
 
   const disableDrawing = () => {
@@ -122,5 +130,6 @@ export default (rowCount: number) => {
     animationPlaying,
     idFromIndex,
     indexFromId,
+    visualizationPainted,
   };
 };
