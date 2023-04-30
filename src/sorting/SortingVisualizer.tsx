@@ -1,5 +1,5 @@
 import React from "react";
-import { useSortingArray } from "../stores/sorting-store";
+import useSortingArray from "./useSortingArray";
 
 export const SortingVisualizer = React.memo(() => {
   const array = useSortingArray();

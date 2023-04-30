@@ -1,14 +1,14 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { DemoContext } from "../contexts/DemoContext";
 import { ConfigureModal } from "../modal/ConfigureModal";
-import { useVisualize } from "../stores/visualize-store";
 
 export function DemoTopBar() {
-  const modalRef = useRef<HTMLDivElement | null>(null);
-  const visualize = useVisualize(state => state.visualize);
-
-  const toggleModal = () => void modalRef.current?.classList.toggle("hidden");
+  const visualize = useContext(DemoContext);
   const [animationPlaying, setAnimationPlaying] = useState(false);
+
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const toggleModal = () => void modalRef.current?.classList.toggle("hidden");
 
   return (
     <>
@@ -35,7 +35,7 @@ export function DemoTopBar() {
         </NavLink>
         <button
           className="col-start-2 border-t-2 border-r-2 bg-gray-100 px-4 hover:text-blue-500 sm:rounded-tl-lg sm:border-l-2"
-          onClick={toggleModal}
+          onClick={animationPlaying ? undefined : toggleModal}
         >
           Configure
         </button>

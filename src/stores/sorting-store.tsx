@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { create } from "zustand";
 
 export type SortingAlgorithm = "insertion" | "merge" | "quick" | "heap";
@@ -16,8 +15,3 @@ export const useSortingStore = create<SortingStore>(() => ({
   speed: "medium",
   amount: 150,
 }));
-
-export const useSortingArray = () => {
-  const amount = useSortingStore(store => store.amount);
-  return useMemo(() => Array.from({ length: amount }, () => ~~(Math.random() * 101)), [amount]);
-};

@@ -1,7 +1,8 @@
+import { DemoProvider } from "../contexts/DemoContext";
 import { ConfigureModalProvider } from "../modal/ConfigureModalContext";
-import { SortingModal } from "../sorting/SortingModal";
-import { useVisualize } from "../stores/visualize-store";
+import { usePathfindingStore } from "../stores/pathfinding-store";
 import { DemoLayout } from "../ui/DemoLayout";
+import { PathfindingModal } from "./PathfindingModal";
 import { bfsPathfind } from "./pathfinding-algorithms";
 import { animateBfs } from "./pathfinding-visualizer";
 import usePathfindingGrid from "./usePathfindingGrid";
@@ -11,14 +12,13 @@ const ANIMATION_SPEED = 10;
 
 export default function PathfindingDemo() {
   const {
-    gridElements,
+    GridElements,
     grid,
     sourceId,
     targetId,
     idFromIndex,
     indexFromId,
     resetGridPaint,
-    disableDrawing,
     animationPlaying,
     visualizationPainted,
   } = usePathfindingGrid(GRID_ROWS);
@@ -26,7 +26,7 @@ export default function PathfindingDemo() {
   const bfsVisualization = async () => {
     resetGridPaint();
     const { path, animationArray } = bfsPathfind(
-      grid.current,
+      grid,
       sourceId,
       targetId,
       idFromIndex,
@@ -36,20 +36,27 @@ export default function PathfindingDemo() {
     await animateBfs(sourceId, targetId, path, animationArray, animationPlaying, ANIMATION_SPEED);
   };
 
-  useVisualize.setState({
-    visualize: bfsVisualization,
-  });
+  const astarVisualization = async () => {
+    resetGridPaint();
+    // get animations
+    visualizationPainted.current = true;
+    // animate
+
+    await Promise.resolve();
+  };
+
+  const getVisualizer = () => {
+    if (usePathfindingStore.getState() === "bfs") {
+      return bfsVisualization();
+    }
+    return astarVisualization();
+  };
 
   return (
-    <ConfigureModalProvider modal={SortingModal}>
-      <DemoLayout>
-        <div
-          className="absolute inset-0 grid auto-rows-min grid-cols-[repeat(23,_minmax(0,_1fr))] grid-rows-[repeat(23,_minmax(0,_1fr))] gap-0 overflow-hidden"
-          onPointerLeave={disableDrawing}
-        >
-          {gridElements}
-        </div>
-      </DemoLayout>
-    </ConfigureModalProvider>
+    <DemoProvider visualize={getVisualizer}>
+      <ConfigureModalProvider modal={PathfindingModal}>
+        <DemoLayout>{GridElements}</DemoLayout>
+      </ConfigureModalProvider>
+    </DemoProvider>
   );
 }

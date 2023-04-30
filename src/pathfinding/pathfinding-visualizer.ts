@@ -1,5 +1,15 @@
 import { MutableRefObject } from "react";
 
+const drawPathNode = (div: HTMLDivElement) => {
+  div.classList.remove("bg-blue-300");
+  div.classList.add("bg-red-300");
+};
+
+const drawSearchedNode = (div: HTMLDivElement) => {
+  div.classList.add("bg-blue-300");
+  div.classList.remove("bg-white");
+};
+
 export const drawPath = (
   sourceId: number,
   targetId: number,
@@ -10,15 +20,16 @@ export const drawPath = (
   new Promise<void>(resolve => {
     let current = targetId as number;
     let iteration = 1;
+
     while (current !== sourceId) {
       current = path.get(current) as number;
-      // since the timeouts are created all in the same closure, I need to give each one a unique "current" value
+      // the timeout functions were all reading the same values because they shared a closure and are executed asynchronously
+      // ...hence the new block
       {
         const localCurrent = current;
         setTimeout(() => {
           const element = document.getElementById(String(localCurrent)) as HTMLDivElement;
-          element.classList.remove("bg-blue-300");
-          element.classList.add("bg-red-300");
+          drawPathNode(element);
           if (String(localCurrent) === String(sourceId)) {
             console.log("done");
             animationPlaying.current = false;
@@ -39,12 +50,12 @@ export const animateBfs = async (
   speed: number
 ) => {
   animationPlaying.current = true;
+
   await new Promise<void>(resolve => {
     animationArray.forEach((id, iteration) => {
       setTimeout(() => {
         const element = document.getElementById(String(id)) as HTMLDivElement;
-        element.classList.add("bg-blue-300");
-        element.classList.remove("bg-white");
+        drawSearchedNode(element);
         if (iteration === animationArray.length - 1) {
           resolve();
         }

@@ -16,7 +16,7 @@ export function ConfigureModal({ toggleModal, modalRef }: Props) {
       ref={modalRef}
     >
       <div
-        className="absolute inset-0 m-auto mt-32 flex h-[65vh] w-full max-w-xl flex-col rounded bg-white px-2 text-center shadow md:w-5/6"
+        className="absolute left-0 right-0 m-auto mt-32 flex max-h-[65vh] w-full max-w-xl flex-col rounded bg-white px-2 text-center shadow md:w-5/6"
         onClick={e => void e.stopPropagation()}
       >
         <div className="flex w-full items-center border-b-2 p-2 px-4">
