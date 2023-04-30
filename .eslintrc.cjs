@@ -40,6 +40,7 @@ module.exports = {
         "@typescript-eslint/switch-exhaustiveness-check": "error",
         "@typescript-eslint/no-use-before-define": "off",
         "@typescript-eslint/no-var-requires": 0,
+        "@typescript-eslint/no-non-null-assertion": "off",
       },
       settings: {
         "import/resolver": {
