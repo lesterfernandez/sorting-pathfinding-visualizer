@@ -31,7 +31,7 @@ export const drawPath = (
           const element = document.getElementById(String(localCurrent)) as HTMLDivElement;
           drawPathNode(element);
           if (String(localCurrent) === String(sourceId)) {
-            console.log("done");
+            console.log("done", iteration);
             animationPlaying.current = false;
             resolve();
           }
@@ -41,7 +41,7 @@ export const drawPath = (
     }
   });
 
-export const animateBfs = async (
+export const animatePathfinding = async (
   sourceId: number,
   targetId: number,
   path: Map<number, number>,

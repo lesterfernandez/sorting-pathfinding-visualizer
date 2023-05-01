@@ -3,8 +3,8 @@ import { ConfigureModalProvider } from "../modal/ConfigureModalContext";
 import { usePathfindingStore } from "../stores/pathfinding-store";
 import { DemoLayout } from "../ui/DemoLayout";
 import { PathfindingModal } from "./PathfindingModal";
-import { bfsPathfind } from "./pathfinding-algorithms";
-import { animateBfs } from "./pathfinding-visualizer";
+import { astarPathfind, bfsPathfind } from "./pathfinding-algorithms";
+import { animatePathfinding } from "./pathfinding-visualizer";
 import usePathfindingGrid from "./usePathfindingGrid";
 
 const GRID_ROWS = 23;
@@ -33,15 +33,34 @@ export default function PathfindingDemo() {
       indexFromId
     );
     visualizationPainted.current = true;
-    await animateBfs(sourceId, targetId, path, animationArray, animationPlaying, ANIMATION_SPEED);
+    await animatePathfinding(
+      sourceId,
+      targetId,
+      path,
+      animationArray,
+      animationPlaying,
+      ANIMATION_SPEED
+    );
   };
 
   const astarVisualization = async () => {
     resetGridPaint();
-    // get animations
+    const { path, animationArray } = astarPathfind(
+      grid,
+      sourceId,
+      targetId,
+      idFromIndex,
+      indexFromId
+    );
     visualizationPainted.current = true;
-    // animate
-
+    await animatePathfinding(
+      sourceId,
+      targetId,
+      path,
+      animationArray,
+      animationPlaying,
+      ANIMATION_SPEED
+    );
     await Promise.resolve();
   };
 
