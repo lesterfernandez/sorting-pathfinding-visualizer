@@ -1,8 +1,8 @@
-import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
+import { createHashRouter, redirect, RouterProvider } from "react-router-dom";
 import PathfindingDemo from "./pathfinding/PathfindingDemo";
 import { SortingDemo } from "./sorting/SortingDemo";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     loader: () => redirect("sorting"),
