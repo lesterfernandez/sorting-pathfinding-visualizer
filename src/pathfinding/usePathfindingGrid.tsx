@@ -87,6 +87,8 @@ export default (rowCount: number) => {
     <div
       className="absolute inset-0 grid auto-rows-min grid-cols-[repeat(23,_minmax(0,_1fr))] grid-rows-[repeat(23,_minmax(0,_1fr))] gap-0 overflow-hidden"
       onPointerLeave={disableDrawing}
+      onPointerUp={disableDrawing}
+      onPointerCancel={disableDrawing}
     >
       {Array.from({ length: rowCount ** 2 }).map((_, i) => {
         if (i === targetId) {
@@ -94,7 +96,8 @@ export default (rowCount: number) => {
             <div
               id={`${i}`}
               key={`pf-${i}`}
-              className="h-[42px] touch-none select-none bg-red-500 outline-dashed outline-1 outline-gray-300"
+              onPointerLeave={e => e.stopPropagation()}
+              className="touch-none select-none bg-red-500 outline-dashed outline-1 outline-gray-300"
             ></div>
           );
         }
@@ -104,7 +107,8 @@ export default (rowCount: number) => {
             <div
               id={`${i}`}
               key={`pf-${i}`}
-              className="h-[42px] touch-none select-none bg-blue-500 outline-dashed outline-1 outline-gray-300"
+              onPointerLeave={e => e.stopPropagation()}
+              className="touch-none select-none bg-blue-500 outline-dashed outline-1 outline-gray-300"
             ></div>
           );
         }
@@ -115,9 +119,8 @@ export default (rowCount: number) => {
             key={`pf-${i}`}
             onPointerDown={handlePointerDown}
             onPointerOver={handlePointerOver}
-            onPointerUp={disableDrawing}
-            onPointerCancel={disableDrawing}
-            className="h-[42px] touch-none select-none bg-white outline-dashed outline-1 outline-gray-300"
+            onPointerLeave={e => e.stopPropagation()}
+            className="touch-none select-none bg-white outline-dashed outline-1 outline-gray-300"
           ></div>
         );
       })}
