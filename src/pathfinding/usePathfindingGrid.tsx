@@ -83,6 +83,22 @@ export default (rowCount: number) => {
     }
   };
 
+  const resetGrid = () => {
+    for (let i = 0; i < rowCount; i++) {
+      for (let j = 0; j < rowCount; j++) {
+        const id = idFromIndex(i, j);
+        if (id !== sourceId && id !== targetId) {
+          grid[i][j] = 0;
+          const element = document.getElementById(String(idFromIndex(i, j))) as HTMLDivElement;
+          element.classList.remove("bg-blue-300");
+          element.classList.remove("bg-red-300");
+          element.classList.remove("bg-amber-100");
+          element.classList.add("bg-white");
+        }
+      }
+    }
+  };
+
   const GridElements = (
     <div
       className="absolute inset-0 grid auto-rows-min grid-cols-[repeat(23,_minmax(0,_1fr))] grid-rows-[repeat(23,_minmax(0,_1fr))] gap-0 overflow-hidden"
@@ -133,6 +149,7 @@ export default (rowCount: number) => {
     sourceId,
     targetId,
     resetGridPaint,
+    resetGrid,
     animationPlaying,
     idFromIndex,
     indexFromId,

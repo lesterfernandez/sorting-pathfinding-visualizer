@@ -19,6 +19,7 @@ export default function PathfindingDemo() {
     idFromIndex,
     indexFromId,
     resetGridPaint,
+    resetGrid,
     animationPlaying,
     visualizationPainted,
   } = usePathfindingGrid(GRID_ROWS);
@@ -73,7 +74,7 @@ export default function PathfindingDemo() {
 
   return (
     <DemoProvider visualize={getVisualizer}>
-      <ConfigureModalProvider modal={PathfindingModal}>
+      <ConfigureModalProvider modal={PathfindingModal(resetGrid)}>
         <DemoLayout>{GridElements}</DemoLayout>
       </ConfigureModalProvider>
     </DemoProvider>
